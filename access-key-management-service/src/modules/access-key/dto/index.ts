@@ -1,5 +1,3 @@
-import { IsNumber, IsOptional } from "class-validator";
-
 export class UpdateAccessKeyDto {
   rateLimit?: number;
   expiresInSeconds?: number;

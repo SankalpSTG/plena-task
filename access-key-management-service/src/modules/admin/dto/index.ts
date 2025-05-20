@@ -1,5 +1,5 @@
 import { Type } from "class-transformer";
-import { IsInt, IsNumber, IsOptional, Min } from "class-validator";
+import { IsInt, IsNumber, IsOptional } from "class-validator";
 
 export class UpdateAccessKeyDto {
   @IsOptional()

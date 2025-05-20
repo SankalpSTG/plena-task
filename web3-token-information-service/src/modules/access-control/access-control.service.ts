@@ -1,13 +1,11 @@
 import {
   Injectable,
 } from '@nestjs/common';
-import Redis from 'ioredis';
 import { AccessKeyType, DeleteAccessKeyType } from './dto';
 import {
   getTTL,
   WINDOW_SIZE,
 } from './constants';
-import { InjectRedis } from '@nestjs-modules/ioredis';
 import { CacheService } from '../cache/cache.service';
 import { getAccessKeyId } from '../cache/constants';
 

@@ -1,4 +1,4 @@
-import { Controller, Get, Patch, Post, Req, UseGuards } from '@nestjs/common';
+import { Controller, Get, Patch, Req, UseGuards } from '@nestjs/common';
 import { UserService } from './user.service';
 import AccessKeyGuard from 'src/guards/access-key.guard';
 import { AuthorizedAccessKeyRequest } from 'src/types/authorized-request.types';
