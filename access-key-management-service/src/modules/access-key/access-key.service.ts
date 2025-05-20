@@ -4,6 +4,7 @@ import { Model } from 'mongoose';
 import { v4 as uuidv4 } from 'uuid';
 import { AccessKey } from 'src/schemas/access-key.schema';
 import { CreateAccessKeyDto, UpdateAccessKeyDto } from './dto';
+import { PaginationType } from '../admin/dto';
 
 @Injectable()
 export class AccessKeyService {
@@ -23,8 +24,9 @@ export class AccessKeyService {
     return newKey.save();
   }
 
-  async getAllKeys(): Promise<AccessKey[]> {
-    return this.keyModel.find().exec();
+  async getKeys(query: PaginationType): Promise<AccessKey[]> {
+    const keys = await this.keyModel.find({}).sort({_id: 1}).skip(query.page * query.limit).limit(query.limit)
+    return keys
   }
 
   async getAccessKeyDetails(accessKey: string): Promise<AccessKey> {

@@ -1,4 +1,5 @@
-import { IsNumber, IsOptional } from "class-validator";
+import { Type } from "class-transformer";
+import { IsInt, IsNumber, IsOptional, Min } from "class-validator";
 
 export class UpdateAccessKeyDto {
   @IsOptional()
@@ -14,4 +15,13 @@ export class CreateAccessKeyDto {
   rateLimit: number;
   @IsNumber()
   expiresInSeconds: number;
+}
+
+export class PaginationType {
+  @Type(() => Number)
+  @IsInt()
+  limit: number;
+  @Type(() => Number)
+  @IsInt()
+  page: number
 }

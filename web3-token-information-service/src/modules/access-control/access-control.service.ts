@@ -1,9 +1,5 @@
 import {
-  HttpException,
-  HttpStatus,
-  Inject,
   Injectable,
-  UnauthorizedException,
 } from '@nestjs/common';
 import Redis from 'ioredis';
 import { AccessKeyType, DeleteAccessKeyType } from './dto';
@@ -32,13 +28,15 @@ export class AccessControlService {
   async deleteToken(data: DeleteAccessKeyType) {
     await this.redis.del(getAccessKeyId(data.key));
   }
-  async updateKeyUsage(key: string) {
+  async getRateLimit(key: string): Promise<number> {
     const dataString = await this.redis.get(getAccessKeyId(key));
-    if (!dataString) throw new UnauthorizedException('Invalid Access Key Provided');
+    if (!dataString)  return 0
     
     const data: AccessKeyType = JSON.parse(dataString);
-    if(!data.enabled) throw new UnauthorizedException("Invalid Access Key Provided")
-
+    if(!data.enabled) return 0
+    return data.rateLimit
+  }
+  async updateKeyUsage(key: string, limit: number): Promise<boolean> {
     const now = Date.now();
     const windowStart = now - WINDOW_SIZE;
     const redisKey = getRateLimitid(key);
@@ -47,15 +45,10 @@ export class AccessControlService {
 
     const currentCount = await this.redis.zcard(redisKey);
 
-    if (currentCount >= data.rateLimit) {
-      throw new HttpException(
-        'Rate limit exceeded',
-        HttpStatus.TOO_MANY_REQUESTS,
-      );
-    }
+    if (currentCount >= limit) return false
 
     await this.redis.zadd(redisKey, now, now.toString());
 
-    await this.redis.expire(redisKey, 61);
+    return true
   }
 }

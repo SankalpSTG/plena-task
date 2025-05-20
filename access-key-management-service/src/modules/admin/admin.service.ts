@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { AccessKeyService } from './access-key.service';
-import { CreateAccessKeyDto, UpdateAccessKeyDto } from './dto';
+import { CreateAccessKeyDto, PaginationType, UpdateAccessKeyDto } from './dto';
 import { AccessKey } from 'src/schemas/access-key.schema';
 import { MessageBrokerService } from '../message-broker/message-broker.service';
 import { RMQEvents } from 'src/transports/rabbitmq/constants';
+import { AccessKeyService } from '../access-key/access-key.service';
 
 @Injectable()
-export class AdminOrchestratedService {
+export class AdminService {
   constructor(
     private readonly accessKeyService: AccessKeyService,
     private readonly messageBrokerService: MessageBrokerService
@@ -22,8 +22,8 @@ export class AdminOrchestratedService {
     return key
   }
 
-  async getAllKeys(): Promise<AccessKey[]> {
-    return this.accessKeyService.getAllKeys()
+  async getKeys(query: PaginationType): Promise<AccessKey[]> {
+    return this.accessKeyService.getKeys(query)
   }
 
   async updateKey(id: string, data: UpdateAccessKeyDto): Promise<AccessKey> {

@@ -9,3 +9,10 @@ export const AccessKeyUpdatesRMQFactory: ClientsProviderAsyncOptions = {
   inject: [ConfigService],
   useFactory: async (configService: ConfigService): Promise<ClientProvider> => RabbitMQConfig(configService, RMQueues.AccessKeyUpdatesQueue)
 }
+
+export const AccessKeyLogsRMQFactory: ClientsProviderAsyncOptions = {
+  name: RMQServices.AccessKeyLogsService,
+  imports: [ConfigModule],
+  inject: [ConfigService],
+  useFactory: async (configService: ConfigService): Promise<ClientProvider> => RabbitMQConfig(configService, RMQueues.AccessKeyLogsQueue)
+}

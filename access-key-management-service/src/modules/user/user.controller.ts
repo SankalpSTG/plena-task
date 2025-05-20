@@ -1,5 +1,5 @@
 import { Controller, Get, Patch, Post, Req, UseGuards } from '@nestjs/common';
-import { UserOrchestratedService } from './user.service';
+import { UserService } from './user.service';
 import AccessKeyGuard from 'src/guards/access-key.guard';
 import { AuthorizedAccessKeyRequest } from 'src/types/authorized-request.types';
 import { ToggleAccessKeyType } from './dto';
@@ -8,7 +8,7 @@ import { ToggleAccessKeyType } from './dto';
 @Controller('user')
 export class UserController {
   constructor(
-    private readonly userOrchestratedService: UserOrchestratedService
+    private readonly userOrchestratedService: UserService
   ){}
   @Get("/key")
   async getAccessKeyDetails(@Req() req: AuthorizedAccessKeyRequest){

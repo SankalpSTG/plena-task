@@ -4,10 +4,11 @@ import { TokenService } from './token.service';
 import { HttpModule } from '@nestjs/axios';
 import { CoinGeckoService } from './coingecko.service';
 import { AccessControlModule } from '../access-control/access-control.module';
+import { LogsModule } from '../logs/logs.module';
 
 
 @Module({
-  imports: [HttpModule, AccessControlModule],
+  imports: [HttpModule, AccessControlModule, LogsModule],
   controllers: [TokenController],
   providers: [TokenService, CoinGeckoService]
 })

@@ -1,12 +1,13 @@
 import { Module } from '@nestjs/common';
 import { UserController } from './user.controller';
-import { UserOrchestratedService } from './user.service';
+import { UserService } from './user.service';
 import { AdminModule } from '../admin/admin.module';
 import { MessageBrokerModule } from '../message-broker/message-broker.module';
+import { AccessKeyModule } from '../access-key/access-key.module';
 
 @Module({
-  imports: [AdminModule, MessageBrokerModule],
+  imports: [AdminModule, MessageBrokerModule, AccessKeyModule],
   controllers: [UserController],
-  providers: [UserOrchestratedService]
+  providers: [UserService]
 })
 export class UserModule {}

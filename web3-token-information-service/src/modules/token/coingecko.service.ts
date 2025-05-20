@@ -1,6 +1,7 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { firstValueFrom } from 'rxjs';
+import { COIN_GECKO_API_ENDPOINTS } from './constants/coin-gecko';
 
 @Injectable()
 export class CoinGeckoService {
@@ -8,7 +9,7 @@ export class CoinGeckoService {
     private readonly httpService: HttpService
   ){}
   async getCoinDetails(coin: string){
-    const response = await firstValueFrom(this.httpService.get(`https://api.coingecko.com/api/v3/coins/${coin}`))
+    const response = await firstValueFrom(this.httpService.get(COIN_GECKO_API_ENDPOINTS.getCoinDetails(coin)))
     return response.data
   }
 }

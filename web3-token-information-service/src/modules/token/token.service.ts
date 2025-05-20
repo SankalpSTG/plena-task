@@ -1,8 +1,6 @@
-import { HttpService } from '@nestjs/axios';
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { firstValueFrom } from 'rxjs';
 import { CoinGeckoService } from './coingecko.service';
-import { COINS } from '../constants/coins';
+import { COINS } from './constants/coins';
 
 @Injectable()
 export class TokenService {
