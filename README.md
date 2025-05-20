@@ -28,9 +28,10 @@ You will find two folders in the collection for both the services. Following are
         2. Update Access Key Status
     2. Admin
         1. Create Access Key (1)
-        2. Get All Access Keys (2)
+        2. Get Access Keys (2)
         3. Update Access Key
         4. Delete Access Key
+        5. Fetch Logs
 2. Web3 Information Service
     1. Token
         1. Get Token Details (4)
