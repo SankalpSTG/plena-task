@@ -13,7 +13,9 @@ This repository is a task given by Plena Finance.
 7. There are two microservices, AKMS creates access key and user can use the same to get token information from WTIS.
 8. None of the methods are completely wrapped with Try-Catch blocks. 
 9. Both services follow modular architecture i.e. services can be further broken as per need. AKMS can be further broken into Admin, User, Logging microservices in future.
-10. Integration Tests have been implemented for granular services to showcase testing skills. Unit Testing has been implemented for a few functions.
+10. Integration Tests have been implemented for granular services to showcase testing skills. Unit Testing has been implemented for a few functions. I am not mocking Redis, RabbitMQ, MongoDB & external API Responses due to restrictions in time. In case of Rate Limit of external services such as CoinGecko, tests might fail.
+
+Please suggest any additional changes if needed, I will be happy to do the same.
 
 ## Initialize
 
@@ -28,11 +30,25 @@ Once started, you can then run the two services
 1. access-key-management-service
 2. web3-token-information-service
 
-Steps to run:
+Steps to initialize:
 1. Go into each folder and run ``npm install``
 2. Copy ``.env.example`` to ``.env`` 
-3. Run ``npm run start:dev`` and then you should be able to run the APIs.
+3. Run ``npm run start:dev``
 
+## Testing through Test Cases
+
+Navigate to AKMS folder and run tests:
+```
+$ cd ./access-key-management-service
+
+$ npm run test
+```
+Navigate to WTIS folder and run tests:
+```
+$ cd ./access-key-management-service
+
+$ npm run test
+```
 ## Postman Collection
 
 There is a Postman export JSON in the root folder, import the JSON file to your project. 
