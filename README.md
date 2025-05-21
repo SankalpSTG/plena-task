@@ -21,12 +21,12 @@ Please suggest any additional changes if needed, I will be happy to do the same.
 
 This project employs RabbitMQ for asynchronous communication between services. Along with it, the project employs Redis and MongoDB as well.
 
-To start these services, there is a docker-compose.yaml file in the root folder which will start all the services. You can spin it up using below command.
+To start RabbitMQ, Redis & MongoDB, there is a docker-compose.yaml file in the root folder which will start all the dependencies. You can spin it up using below command.
 ```
 docker-compose up
 ```
 
-Once started, you can then run the two services
+Once started, you can then run the two microservices
 1. access-key-management-service
 2. web3-token-information-service
 
