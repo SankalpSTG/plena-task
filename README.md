@@ -2,6 +2,19 @@
 
 This repository is a task given by Plena Finance.
 
+
+## Task Pointers Covered
+1. Whole communication is asynchronous via RabbitMQ. AKMS sends token data to WTIS and WTIS sends logs to AKMS all via Queues.
+2. Both microservices do not share any database.
+3. Auth hasn't been implemented but Auth Middlewares are created to decode and check if tokens are provided. AdminAuthGuard and AccessKeyGuard are used by AKMS. AccessKeyGuard (different from AccessKeyGuard of AKMS) is used by WTIS
+4. I have focused on creating Granular classes adhering SOLID Principles so that it becomes easy to test
+5. Variable / function namings are defined as per the context.
+6. REST principles are followed considering API path conventions
+7. There are two microservices, AKMS creates access key and user can use the same to get token information from WTIS.
+8. None of the methods are completely wrapped with Try-Catch blocks. 
+9. Both services follow modular architecture i.e. services can be further broken as per need. AKMS can be further broken into Admin, User, Logging microservices in future.
+10. Integration Tests have been implemented for granular services to showcase testing skills. Unit Testing has been implemented for a few functions.
+
 ## Initialize
 
 This project employ s RabbitMQ for event driven behavior. Along with it, the project employs Redis and MongoDB as well.

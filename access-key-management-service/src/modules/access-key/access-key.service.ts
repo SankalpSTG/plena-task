@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { v4 as uuidv4 } from 'uuid';
-import { AccessKey } from 'src/schemas/access-key.schema';
+import { AccessKey, AccessKeyDocument } from 'src/schemas/access-key.schema';
 import { CreateAccessKeyDto, UpdateAccessKeyDto } from './dto';
 import { PaginationType } from '../admin/dto';
 
@@ -10,7 +10,7 @@ import { PaginationType } from '../admin/dto';
 export class AccessKeyService {
   constructor(@InjectModel(AccessKey.name) private keyModel: Model<AccessKey>) {}
 
-  async createKey(dto: CreateAccessKeyDto): Promise<AccessKey> {
+  async createKey(dto: CreateAccessKeyDto): Promise<AccessKeyDocument> {
     const key = uuidv4();
     const expiresAt = new Date(Date.now() + dto.expiresInSeconds * 1000);
 
@@ -24,7 +24,7 @@ export class AccessKeyService {
     return newKey.save();
   }
 
-  async getKeys(query: PaginationType): Promise<AccessKey[]> {
+  async getKeys(query: PaginationType): Promise<AccessKeyDocument[]> {
     const keys = await this.keyModel.find({}).sort({_id: 1}).skip(query.page * query.limit).limit(query.limit)
     return keys
   }
