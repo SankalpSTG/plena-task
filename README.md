@@ -1,6 +1,6 @@
 # Plena Task
 
-This repository is a task given by Plena Finance.
+This repository is a task given by Plena Finance. Please watch the demo video by [clicking here](https://drive.google.com/file/d/1zfxevsMAHzthygOHicMoS8w16BU_IDNH/view?usp=sharing)
 
 
 ## Task Pointers Covered
