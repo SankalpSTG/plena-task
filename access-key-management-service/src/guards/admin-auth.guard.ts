@@ -30,7 +30,6 @@ export default class AdminAuthGuard implements CanActivate {
   }
   private decodeWithAdminToken(token: string) {
     try {
-      console.log("Decoding User Token");
       return this.jwtService.verify(token, {
         secret: process.env.ADMIN_ACCESS_TOKEN_SECRET,
       });
