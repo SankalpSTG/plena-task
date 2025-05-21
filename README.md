@@ -1,10 +1,10 @@
 # Plena Task
 
-This repository is a task given by Plena Finance
+This repository is a task given by Plena Finance.
 
 ## Initialize
 
-This project employes RabbitMQ for event driven behavior. Along with it, the project employs Redis and MongoDB as well.
+This project employ s RabbitMQ for event driven behavior. Along with it, the project employs Redis and MongoDB as well.
 
 To start these services, there is a docker-compose.yaml file in the root folder which will start all the services. You can spin it up using below command.
 ```
@@ -15,7 +15,10 @@ Once started, you can then run the two services
 1. access-key-management-service
 2. web3-token-information-service
 
-Go into each folder and run ``npm install`` and ``npm run start:dev`` and then you should be able to run the APIs.
+Steps to run:
+1. Go into each folder and run ``npm install``
+2. Copy ``.env.example`` to ``.env`` 
+3. Run ``npm run start:dev`` and then you should be able to run the APIs.
 
 ## Postman Collection
 
@@ -53,23 +56,21 @@ $ npm run generate
 This should log a new JWT Token which you can use for Admin APIs.
 
 ## Project Structure
+![Project Strucutre](./image.jpg)
 ### Access Key Management Service
-This service has 3 modules
-1. Admin Module
-2. Message Broker Module
-3. User Module
+This service has 5 modules
+1. Access Key Module
+2. Admin Module
+3. Logs Module
+4. Message Broker Module
+5. User Module
 
 #### APIs
-1. Admin, User expose APIs as per requirements in the task.
-2. Message Broker Module doesn't expose APIs and is a common module for RabbitMQ to be used by Admin and User. 
+Admin, User expose APIs as per requirements in the task.
 
 #### Guards
 1. Admin controller is protected by AdminAuthGuard which verifies Admin JWT Token. 
 2. User controller is protected by the AccessKeyGuard which only checks if a token is provided in ``x-api-key`` header or else it blocks the request. 
-
-#### Services
-1. Admin controller depends on Admin service which depends on Access Key service for key CRUD operations. Admin service is also responsible to emit RabbitMQ events via MessageBroker service.
-2. User controller depends on User service which depends on Access Key service to get key details and update key status. User service also talks with MessageBroker service to emit RabbitMQ events.
 
 ### Web3 Token Information Service
 This service has 2 modules
@@ -81,8 +82,4 @@ This service has 2 modules
 2. Token Module exposes APIs as per requirements of the task.
 
 #### Guards
-1. Token Module is protected by AccessKeyGuard which employs Access Control Service to check if a token is valid and within the rate limit.
-
-#### Services
-1. Access Key Controller depends on Access Key Service which adds and updates access keys into Redis. Access Key also employs a sliding window rate limit with a window of 60 seconds. The same is used by AccessKeyGuard.
-2. Token Module depends on Token Service which depends on Coin Gecko Service for coin details.
+1. Token Module is protected by AccessKeyGuard which employs Access Control Service to check if a token is valid and within the rate limit. The same uses logs service to send logs.
