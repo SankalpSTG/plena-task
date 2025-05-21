@@ -19,7 +19,7 @@ Please suggest any additional changes if needed, I will be happy to do the same.
 
 ## Initialize
 
-This project employ s RabbitMQ for event driven behavior. Along with it, the project employs Redis and MongoDB as well.
+This project employs RabbitMQ for asynchronous communication between services. Along with it, the project employs Redis and MongoDB as well.
 
 To start these services, there is a docker-compose.yaml file in the root folder which will start all the services. You can spin it up using below command.
 ```
